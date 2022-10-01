@@ -149,6 +149,6 @@ if __name__ == "__main__":
         '- surume'
     
     ip = IssueParser()
-    title_pairs = ip.parse_md(body)
+    title_pairs = ip.get_titlepair_from_markdown(body)
 
     print(",".join([str(p) for p in title_pairs]))

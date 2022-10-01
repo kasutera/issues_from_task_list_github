@@ -1,5 +1,5 @@
 from typing import Dict, Union
-from github_client import GithubClient
+from .github_client import GithubClient
 from github.Issue import Issue
 from github.Repository import Repository
 from github.AuthenticatedUser import AuthenticatedUser

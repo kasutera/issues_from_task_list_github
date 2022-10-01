@@ -12,16 +12,17 @@ class TitlePair():
 
     def __init__(self, src_str, title) -> None:
         self.src_str = src_str
-        self.title = title
+        self.issue_title = title
     
     def __str__(self) -> str:
         return str({
             'src_str': self.src_str,
-            'title': self.title,
+            'title': self.issue_title,
         })
     
-    def add_prefix_issue_title(self, prefix: str) -> None:
+    def add_prefix_issue_title(self, prefix: str) -> 'TitlePair':
         self.issue_title = prefix + self.issue_title
+        return self
 
 
 class IssueParser():
@@ -132,9 +133,6 @@ class IssueParser():
         
         with ASTRenderer() as renderer:
             doc = Document(md_str)
-            rendered = renderer.render(doc)
-            print(rendered)
-
             return self._parse_base_children_ast(doc.children)
 
 

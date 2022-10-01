@@ -1,5 +1,5 @@
 import unittest
-from issue_parser import IssueParser, TitlePair
+from issue_parser import IssueParser, TitleTuple
 
 class TestIssueParser(unittest.TestCase):
 
@@ -21,13 +21,16 @@ class TestIssueParser(unittest.TestCase):
             '    - fu\n'    \
             '- [x] ke\n'    \
             '## huga\n'     \
-            '- [ ] kanye\n' \
+            '- [ ] `kanye` to `ye`\n' \
             '- surume'
         
         expected = [
-            TitlePair('[ ] po', 'hoge - po'),
-            TitlePair('[ ] kanye', 'hoge - huga - kanye'),
+            TitleTuple('[ ] po', 'hoge - po', '- fu'),
+            TitleTuple('[ ] `kanye` to `ye`', 'hoge - huga - `kanye` to `ye`'),
         ]
+
+        ip = IssueParser()
+        self.assertEqual(ip.get_titletuple_from_markdown(body), expected)
     
 
 if __name__ == "__main__":

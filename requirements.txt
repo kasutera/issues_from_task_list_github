@@ -1,3 +1,3 @@
 PyGithub
 requests
-mistletoe
+-e git+https://github.com/anderskaplan/mistletoe.git@2eaf42087dd5f45202eddda6379e07e6f0c53b4a#egg=mistletoe

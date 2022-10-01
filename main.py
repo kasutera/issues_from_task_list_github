@@ -27,12 +27,12 @@ if __name__ == "__main__":
     if not parser.is_valid_md(issue_markdown):
         raise ValueError('Specified URL seems not to have valid markdown for this app')
     
-    title_pairs = parser.get_titlepair_from_markdown(issue_markdown)
-    for title_pair in title_pairs:
+    title_tuples = parser.get_titletuple_from_markdown(issue_markdown)
+    for title_tuple in title_tuples:
         if title_prefix:
-            title_pair.add_prefix_issue_title(title_prefix)
+            title_tuple.add_prefix_issue_title(title_prefix)
 
-        number_xxx = generator.generate(url, title_pair.issue_title)
-        issue_markdown = issue_markdown.replace(title_pair.src_str, number_xxx)
+        number_xxx = generator.generate(url, title_tuple.issue_title, title_tuple.issue_body)
+        issue_markdown = issue_markdown.replace(title_tuple.src_str, number_xxx)
     
     print(issue_markdown)

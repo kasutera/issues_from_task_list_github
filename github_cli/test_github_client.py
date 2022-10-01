@@ -45,10 +45,12 @@ class TestGithubClient(unittest.TestCase):
     def test_get_issue_body(self):
         github_client = GithubClient(self.token, dry_run=True)
         url = 'https://github.com/kasutera/issues_from_task_list_github/issues/2'
-        expected_body = \
-            '# hoge\n' \
-            '- po\n' \
-            '## huga\n' \
+        expected_body =  \
+            '# hoge\n'   \
+            '- [ ] po\n' \
+            '    - fu\n' \
+            '- [x] ke\n' \
+            '## huga\n'  \
             '- surume'
         actual_body = github_client.get_issue_body(url)
         self.assertEqual(expected_body, actual_body)

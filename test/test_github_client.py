@@ -42,6 +42,8 @@ class TestGithubClient(unittest.TestCase):
             '# hoge\n'   \
             '- [ ] po\n' \
             '    - fu\n' \
+            '    - makige\n' \
+            '        - aapp\n' \
             '- [x] ke\n' \
             '## huga\n'  \
             '- surume'

@@ -49,7 +49,7 @@ class IssueGenerator():
             title (str): title of issue
 
         Returns:
-            str: #xxx (issue number)
+            str: '[ ] #xxx' (issue number)
         """
         assignee = self.client.get_myself()
         dict_or_issue = self._generate_issue_union(repository, title, body, assignee)
@@ -57,8 +57,8 @@ class IssueGenerator():
         if isinstance(dict_or_issue, dict):
             print(dict_or_issue)
             self.issue_no_dry_run += 1
-            return f'#{self.issue_no_dry_run}'
+            return f'[ ] #{self.issue_no_dry_run}'
         elif isinstance(dict_or_issue, Issue):
-            return f'#{dict_or_issue.number}'
+            return f'[ ] #{dict_or_issue.number}'
         else:
             raise ValueError(dict_or_issue)

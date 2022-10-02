@@ -38,4 +38,4 @@ class TestIssueGenerator(unittest.TestCase):
         title = 'test issue'
         repo = client.get_repo_from_issue_url(url)
         title_to_be_replaced = issue_generator.generate(repo, title)
-        self.assertEqual(title_to_be_replaced, '#10001')
+        self.assertEqual(title_to_be_replaced, '[ ] #10001')

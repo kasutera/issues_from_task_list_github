@@ -18,6 +18,22 @@ class TestGithubClient(unittest.TestCase):
             'https://api.github.com/repos/PyGithub/PyGithub', issue.repository.url
         )
         self.assertEqual(11, issue.number)
+
+    def test_get_repo_from_issue_url(self):
+        url = 'https://github.com/PyGithub/PyGithub/issues/11'
+        github_client = GithubClient(self.token)
+        repository = github_client.get_repo_from_issue_url(url)
+        self.assertEqual(
+            'https://api.github.com/repos/PyGithub/PyGithub', repository.url
+        )
+
+    def test_get_repo_from_url(self):
+        url = 'https://github.com/PyGithub/PyGithub/'
+        github_client = GithubClient(self.token)
+        repository = github_client.get_repo_from_url(url)
+        self.assertEqual(
+            'https://api.github.com/repos/PyGithub/PyGithub', repository.url
+        )
     
     def test_get_issue_body(self):
         github_client = GithubClient(self.token)

@@ -36,5 +36,6 @@ class TestIssueGenerator(unittest.TestCase):
         issue_generator = IssueGenerator(client, True)
         url = 'https://github.com/kasutera/issues_from_task_list_github/issues/1'
         title = 'test issue'
-        title_to_be_replaced = issue_generator.generate(url, title)
+        repo = client.get_repo_from_issue_url(url)
+        title_to_be_replaced = issue_generator.generate(repo, title)
         self.assertEqual(title_to_be_replaced, '#10001')

@@ -41,19 +41,18 @@ class IssueGenerator():
         else:
             return self._generate_issue(repo, title, body, assignee)
 
-    def generate(self, md_issue_url: str, title: str, body: Optional[str]=None) -> str:
+    def generate(self, repository: Repository, title: str, body: Optional[str]=None) -> str:
         """generate issue
 
         Args:
-            md_issue_url (str): issue url (create another issue on this repository)
+            repository (Repository): repository to create issue
             title (str): title of issue
 
         Returns:
             str: #xxx (issue number)
         """
-        issue = self.client.get_issue_from_url(md_issue_url)
         assignee = self.client.get_myself()
-        dict_or_issue = self._generate_issue_union(issue.repository, title, body, assignee)
+        dict_or_issue = self._generate_issue_union(repository, title, body, assignee)
 
         if isinstance(dict_or_issue, dict):
             print(dict_or_issue)

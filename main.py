@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 from sys import prefix
+import sys
 
 from github.Repository import Repository
 
@@ -41,28 +42,28 @@ def handle_args(client: GithubClient) -> Args:
         help="Prefix to add to issue title"
     )
     args = parser.parse_args()
-    is_dry_run = not args.execute
-    url = args.issue_url
-    issue_path = args.issue_path
-    repository = args.repository
-    title_prefix = args.prefix
+    is_dry_run: bool = not args.execute
+    issue_url: str = args.issue_url
+    issue_path: str = args.issue_path
+    repository_url: str = args.repository
+    title_prefix: str = args.prefix
 
-    if url is not None and issue_path is None and repository is None:
-        issue_markdown = client.get_issue_body(url)
-        repo = client.get_repo_from_issue_url(url)
-        return Args(repo, issue_markdown, is_dry_run, prefix)
+    if issue_url is not None and issue_path is None and repository_url is None:
+        issue_markdown = client.get_issue_body(issue_url)
+        repo = client.get_repo_from_issue_url(issue_url)
+        return Args(repo, issue_markdown, is_dry_run, title_prefix)
 
-    elif url is None and issue_path is not None and repository is not None:
+    elif issue_url is None and issue_path is not None and repository_url is not None:
         path = Path(issue_path)
         assert path.exists, path
         issue_markdown = path.read_text()
-        repo = client.get_repo_from_url(url)
+        repo = client.get_repo_from_url(repository_url)
 
-        return Args(repo, issue_markdown, is_dry_run, prefix)
+        return Args(repo, issue_markdown, is_dry_run, title_prefix)
     
     else:
         parser.print_help()
-        raise 
+        sys.exit(1)
 
 
 def main():

@@ -19,13 +19,15 @@ class TestIssueParser(unittest.TestCase):
             '# hoge\n'      \
             '- [ ] po\n'    \
             '    - fu\n'    \
+            '        - ma\n'\
+            '    - pi\n'    \
             '- [x] ke\n'    \
             '## huga\n'     \
             '- [ ] `kanye` to `ye`\n' \
             '- surume'
         
         expected = [
-            TitleTuple('[ ] po', 'hoge - po', '- fu'),
+            TitleTuple('[ ] po', 'hoge - po', '- fu\n  - ma\n- pi'),
             TitleTuple('[ ] `kanye` to `ye`', 'hoge - huga - `kanye` to `ye`'),
         ]
 

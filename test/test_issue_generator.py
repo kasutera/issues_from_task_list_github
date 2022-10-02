@@ -1,8 +1,8 @@
 import os
 import unittest
 from github.Issue import Issue
-from github_client import GithubClient
-from issue_generator import IssueGenerator
+from github_cli.github_client import GithubClient
+from github_cli.issue_generator import IssueGenerator
 
 class TestIssueGenerator(unittest.TestCase):
 
@@ -16,13 +16,16 @@ class TestIssueGenerator(unittest.TestCase):
         client = GithubClient(self.token)
         issue_generator = IssueGenerator(client, True)
         title = 'test issue'
+        body = '- this is body\n' \
+            '- with bullet'
         issue: Issue = client.get_issue_from_url(url)
         actual = issue_generator._dry_generate_issue(
-            issue.repository, title, client.get_myself()
+            issue.repository, title, body, client.get_myself()
         )
         expected = {
             "repository": 'https://api.github.com/repos/kasutera/issues_from_task_list_github',
             "issue_title": title,
+            "body": body,
             "assignee": 'kasutera'
         }
         self.assertEqual(actual, expected)
@@ -35,7 +38,3 @@ class TestIssueGenerator(unittest.TestCase):
         title = 'test issue'
         title_to_be_replaced = issue_generator.generate(url, title)
         self.assertEqual(title_to_be_replaced, '#10001')
-
-
-if __name__ == "__main__":
-    unittest.main()

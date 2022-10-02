@@ -1,5 +1,5 @@
 import unittest
-from issue_parser import IssueParser, TitleTuple
+from markdown.issue_parser import IssueParser, TitleTuple
 
 class TestIssueParser(unittest.TestCase):
 
@@ -31,7 +31,3 @@ class TestIssueParser(unittest.TestCase):
 
         ip = IssueParser()
         self.assertEqual(ip.get_titletuple_from_markdown(body), expected)
-    
-
-if __name__ == "__main__":
-    unittest.main()

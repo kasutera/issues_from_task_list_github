@@ -1,7 +1,7 @@
 import os
 import unittest
 from github.Issue import Issue
-from github_client import GithubClient
+from github_cli.github_client import GithubClient
 
 class TestGithubClient(unittest.TestCase):
 
@@ -31,7 +31,3 @@ class TestGithubClient(unittest.TestCase):
             '- surume'
         actual_body = github_client.get_issue_body(url)
         self.assertEqual(expected_body, actual_body)
-
-
-if __name__ == "__main__":
-    unittest.main()

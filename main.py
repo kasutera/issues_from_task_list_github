@@ -5,7 +5,7 @@ from markdown.issue_parser import IssueParser
 from github_cli.github_client import GithubClient
 from github_cli.issue_generator import IssueGenerator
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--issue_url", help="Specify where issue markdown is")
     parser.add_argument("--execute", help="Actually execute creation",
@@ -36,3 +36,5 @@ if __name__ == "__main__":
         issue_markdown = issue_markdown.replace(title_tuple.src_str, number_xxx)
     
     print(issue_markdown)
+
+main()
